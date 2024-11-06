@@ -1,0 +1,75 @@
+{% load custom_filters %}
+
+<!doctype html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Contract</title>
+</head>
+<body>
+
+<!-- فرم جستجو -->
+<form method="get" action="{% url 'search_employee' %}">
+    <input type="text" name="personal_code" placeholder="کد پرسنلی را وارد کنید">
+    <button type="submit">جستجو</button>
+</form>
+
+<!-- نمایش اطلاعات کارمند -->
+{% if employee %}
+<h2>اطلاعات کارمند</h2>
+<ul>
+    {% for key, value in employee.items %}
+    <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- نمایش متن قرارداد با داده‌های پویا -->
+<div style="margin-top: 20px; padding: 15px; border: 1px solid #000;">
+    <h2>قرارداد کار</h2>
+    <p><strong>کارفرما:</strong> شرکت تولیدی صنعتی بهران موتور گلپایگان</p>
+    <p><strong>شماره پرسنلی:</strong> {{ employee.personal_code }}</p>
+    <p><strong>نام و نام خانوادگی کارگر:</strong> {{ employee.name }}</p>
+    <p><strong>فرزند:</strong> {{ employee.father_name }}</p>
+    <p><strong>کدملی:</strong> {{ employee.national_code }}</p>
+    <p><strong>ساکن:</strong> {{ employee.address }}</p>
+    <p><strong>مدت قرارداد:</strong> {{ employee.contract_duration }}</p>
+    <p><strong>دستمزد و مزایا:</strong> {{ employee.salary }} ریال ماهانه</p>
+    <p><strong>موضوع قرارداد:</strong> {{ employee.contract_subject }}</p>
+    <p><strong>محل اجرای قرارداد:</strong> {{ employee.contract_location }}</p>
+    <p><strong>محل کار:</strong> {{ employee.work_unit }}</p>
+
+    <h3>تعهدات کارفرما:</h3>
+    <ul>
+        <li>ارائه لیست کارکرد کارگر به سازمان‌های بیمه‌گر</li>
+        <li>پرداخت حقوق و مزایای قانونی بر اساس ضوابط</li>
+        <li>استفاده از مرخصی طبق قانون کار</li>
+        <li>استفاده از تعطیلات رسمی</li>
+        <li>سایر مزایای قانونی</li>
+    </ul>
+
+    <h3>تعهدات کارگر:</h3>
+    <ul>
+        <li>کار با عشق و علاقه و رعایت مقررات شرکت</li>
+        <li>حضور به موقع در محل کار</li>
+        <li>حفظ اسرار شرکت و رعایت اصول ایمنی</li>
+        <li>خودداری از همکاری با سایر شرکت‌ها در ساعات اداری و غیراداری</li>
+        <li>رعایت و تأمین خواسته‌های قانونی مسئولین شرکت</li>
+        <li>حفظ اسرار، اسناد و اطلاعات شرکت</li>
+        <li>حضور کامل در محل کار برابر ساعت کاری</li>
+        <li>رعایت اصول ایمنی و بهداشتی در محیط کار</li>
+        <li>عدم استعمال دخانیات و مواد غیرمجاز در محیط شرکت</li>
+        <li>رعایت اصول و ضوابط کیفی</li>
+    </ul>
+
+    <h3>فسخ قرارداد:</h3>
+    <p>قصور در انجام وظایف محوله، نقض مقررات، ترک خدمت بیش از 15 روز، و عدم رعایت موارد تعهدات کارگر به منزله فسخ قرارداد می‌باشد.</p>
+    <p>این قرارداد در 12 ماده و سه نسخه به امضا طرفین رسیده است.</p>
+    <p><strong>نام و امضای مدیرعامل</strong></p>
+    <p><strong>نام و امضای مدیر منابع انسانی</strong></p>
+    <p><strong>نام و امضای کارگر</strong></p>
+</div>
+
+</body>
+</html>
